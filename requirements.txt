@@ -3,4 +3,5 @@ PyYAML
 psycopg2-binary
 pymongo
 redis
+hdbcli
 pytest

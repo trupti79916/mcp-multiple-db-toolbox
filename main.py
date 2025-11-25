@@ -60,6 +60,9 @@ def get_or_create_connector(db_id: str):
         elif db_type == "redis":
             from connectors.redis import RedisConnector
             connectors[db_id] = RedisConnector(config)
+        elif db_type == "hana":
+            from connectors.hanadb import HANAConnector
+            connectors[db_id] = HANAConnector(config)
         else:
             raise ValueError(f"Unknown database type: {db_type}")
             
@@ -132,6 +135,28 @@ def delete_redis(db_id: str, key: str) -> int:
     """Delete a key from Redis cache."""
     connector = get_or_create_connector(db_id)
     return connector.delete(key)
+
+# HANA Tools
+@mcp.tool()
+def query_hana(db_id: str, query: str, params: Optional[str] = None) -> list:
+    """Execute a SQL query against a SAP HANA database."""
+    connector = get_or_create_connector(db_id)
+    
+    import json
+    parsed_params = json.loads(params) if params else None
+    return connector.execute_query(query, tuple(parsed_params) if parsed_params else None)
+
+@mcp.tool()
+def list_schemas_hana(db_id: str) -> list:
+    """List all schemas in a SAP HANA database."""
+    connector = get_or_create_connector(db_id)
+    return connector.list_schemas()
+
+@mcp.tool()
+def list_tables_hana(db_id: str, schema_name: Optional[str] = None) -> list:
+    """List all tables in a SAP HANA database, optionally filtered by schema."""
+    connector = get_or_create_connector(db_id)
+    return connector.list_tables(schema_name)
 
 if __name__ == "__main__":
     logger.info("Starting Multi-DB MCP Server...")

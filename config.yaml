@@ -24,7 +24,7 @@ databases:
   - id: "atlas_mongo"
     type: "mongodb"
     uri: "${MONGODB_ATLAS_URI}"
-    database: "nozama-search"
+    database: "${MONGODB_ATLAS_DB}"
 
   # Redis Example
   # Uncomment and configure if you want to use Redis
@@ -33,6 +33,16 @@ databases:
   #   host: "localhost"
   #   port: 6379
   #   db: 0
+
+  # HANA Example
+  # Uncomment and configure if you want to use SAP HANA
+  - id: "hana_db"
+    type: "hana"
+    host: "${HANA_HOST}"
+    port: "${HANA_PORT}"
+    user: "${HANA_USER}"
+    password: "${HANA_PASSWORD}"
+    schema: "${HANA_SCHEMA}"
 
 # You can add multiple instances of the same type:
 # - id: "analytics_postgres"

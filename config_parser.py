@@ -108,6 +108,12 @@ def validate_db_config(config: Dict[str, Any]) -> None:
             if field not in config or config[field] is None:
                 raise ConfigError(f"Redis database '{db_id}' missing field: {field}")
     
+    elif db_type == "hana":
+        required_fields = ["host", "port", "schema","user","password"]
+        for field in required_fields:
+            if field not in config or config[field] is None:
+                raise ConfigError(f"Redis database '{db_id}' missing field: {field}")
+    
     else:
         raise ConfigError(f"Unknown database type '{db_type}'")
 
