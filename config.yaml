@@ -1,0 +1,44 @@
+# Multi-DB MCP Toolbox Configuration
+# Configure only the databases you want to use
+
+databases:
+  # PostgreSQL Example
+  # Uncomment and configure if you want to use PostgreSQL
+  # - id: "prod_postgres"
+  #   type: "postgres"
+  #   host: "localhost"
+  #   port: 5432
+  #   user: "${PROD_POSTGRES_USER}"
+  #   password: "${PROD_POSTGRES_PASSWORD}"
+  #   dbname: "prod"
+
+  # MongoDB Example (Local)
+  # Uncomment and configure if you want to use local MongoDB
+  # - id: "dev_mongo"
+  #   type: "mongodb"
+  #   uri: "mongodb://localhost:27017/"
+  #   database: "dev"
+
+  # MongoDB Atlas Example (Cloud)
+  # Uncomment and configure if you want to use MongoDB Atlas
+  - id: "atlas_mongo"
+    type: "mongodb"
+    uri: "${MONGODB_ATLAS_URI}"
+    database: "nozama-search"
+
+  # Redis Example
+  # Uncomment and configure if you want to use Redis
+  # - id: "cache_redis"
+  #   type: "redis"
+  #   host: "localhost"
+  #   port: 6379
+  #   db: 0
+
+# You can add multiple instances of the same type:
+# - id: "analytics_postgres"
+#   type: "postgres"
+#   host: "analytics-server.example.com"
+#   port: 5432
+#   user: "${ANALYTICS_POSTGRES_USER}"
+#   password: "${ANALYTICS_POSTGRES_PASSWORD}"
+#   dbname: "analytics"
