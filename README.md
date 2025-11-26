@@ -1,4 +1,4 @@
-# mcp-multiple-db-toolbox
+# MCP Multi-DB Toolkit
 
 Connect to multiple databases using 1 MCP server.
 
